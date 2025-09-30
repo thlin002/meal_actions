@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic import TemplateView
 
 import django_js_reverse.views
 from common.routes import routes as common_routes
@@ -8,6 +9,7 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
+from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
 from users.routes import routes as users_routes
 
@@ -24,6 +26,7 @@ urlpatterns = [
     path("admin/defender/", include("defender.urls")),
     path("jsreverse/", django_js_reverse.views.urls_js, name="js_reverse"),
     path("api/", include(router.urls), name="api"),
+    path("api/login/", obtain_auth_token, name="api_login"),
     # drf-spectacular
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
@@ -36,4 +39,6 @@ urlpatterns = [
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
     ),
+    # Catch-all for frontend routes
+    path("<path:resource>", TemplateView.as_view(template_name="common/index.html")),
 ]

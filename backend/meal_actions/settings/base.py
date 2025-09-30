@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "webpack_loader",
     "import_export",
     "rest_framework",
+    "rest_framework.authtoken",
     "drf_spectacular",
     "defender",
     "django_guid",
