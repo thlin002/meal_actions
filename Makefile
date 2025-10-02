@@ -37,6 +37,7 @@ docker_update_dependencies:
 
 docker_down:
 	docker compose down
+	docker volume prune -f
 
 docker_logs:
 	docker compose logs -f $(ARG)
