@@ -1,4 +1,5 @@
 import { NavLink } from "react-router";
+import LogoutButton from "./LogoutButton";
 
 const TopNav = () => {
   return (
@@ -40,6 +41,8 @@ const TopNav = () => {
           >
             Users
           </NavLink>
+
+          {localStorage.getItem("token") && <LogoutButton />}
         </div>
       </nav>
     </header>
